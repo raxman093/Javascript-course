@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Project</title>
+    <style>
+      body{
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .sub-button{
+        border: none;
+        background-color: black;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 50px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .is-subscribed{
+        background-color: rgb(240, 240, 240);
+        color: black;
+      }
+      .input-price{
+        padding: 10px;
+      }
+      .calculateButton{
+        padding: 12px 15px;
+        font-size: 15px;
+        border: none;
+        color: white;
+        background-color: green;
+        cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+  <p>Кнопка подписки на YouTube</p>
+  <button onclick="subscribe(this)" class="sub-button">Подписаться</button>
+
+  <p>Калькулятор доставки Amazon</p>
+  <p>
+    Если сумма меньше $40 - доставка будет $10 <br>
+    Если сумма больше $40 - доставка бесплатно
+  </p>
+  <input type="text" placeholder="Стоимость заказа" class="input-price" onkeydown="costKeydown(event)">
+  <button onclick="calculateTotal()" class="calculateButton">Расчитать</button>
+  <p class="total-cost"></p>
+
+
+
+  <script>
+    function costKeydown(event){
+      if(event.key === 'Enter'){
+        calculateTotal();
+      }
+    }
+
+
+    function calculateTotal(){
+      let totalCost = document.querySelector(".total-cost");
+      let inputElement = document.querySelector(".input-price");
+      let cost = Number(inputElement.value);
+
+       if(cost < 40 && cost >= 0){
+        cost += 10;
+        totalCost.innerText = `$${cost}`;
+       }else if(cost <= 0){
+        totalCost.innerText = 'Введите корректное значение!';
+       }else{
+        totalCost.innerText = `$${cost}`;
+       }
+        
+    }
+
+
+    function subscribe(button){
+      if(button.innerText === 'Подписаться'){
+        button.innerText = "Подписанны";
+        button.classList.add('is-subscribed');
+      }else{
+        button.innerText = "Подписаться";
+        button.classList.remove('is-subscribed');
+      }
+    }
+  
+  </script>
+</body>
+</html>

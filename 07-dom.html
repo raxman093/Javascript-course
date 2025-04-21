@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=bu, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<body>
+  <button>Hello</button>
+
+  <script>
+    document.body.innerHTML = 'hello';  
+    /*
+      document — это глобальный объект в браузере, который представляет всю веб-страницу.
+      У него есть свойство body, которое ссылается на тег <body>
+        innerHTML — это свойство объекта body, которое содержит HTML-код внутри <body>.
+
+      Когда мы пишем:
+      document.body.innerHTML = 'hello'; это означает: Удалить всё внутри <body>. Вставить туда текст "hello" (как HTML).
+      
+      
+    */
+    document.title = "Good Job!" /*title — это свойство объекта document, которое содержит текст заголовка страницы (то, что видно на вкладке браузера).*/
+  
+  
+  </script>
+</body>
+</html>
