@@ -1,0 +1,30 @@
+
+
+<script>
+  const todoList = []; 
+  let jsList = document.querySelector('.js-todo-list'); //нашли список сюда будем добавлять новые элементы
+  let todoListHtml = "";
+  function addTodo(){
+    const inputElement = document.querySelector(".js-name-input"); //нашли input откуда будем брать значение и добавлять на страницу
+    todoListHtml += `<li>${inputElement.value}</li>`
+    inputElement.value = "";
+    jsList.innerHTML = todoListHtml;
+  }
+</script>
+
+<script>
+  const todoList = []; 
+  let jsList = document.querySelector('.js-todo-list'); //нашли список сюда будем добавлять новые элементы
+  
+  function addTodo(){
+    let todoListHtml = "";
+    const inputElement = document.querySelector(".js-name-input"); //нашли input откуда будем брать значение и добавлять на страницу
+    todoList.push(inputElement.value); //Добавили наше значение в конец массива
+      inputElement.value = ""; //очистили наш input
+      for(let i = 0; i < todoList.length; i++){
+        todoListHtml += `<li>${todoList[i]}</li>`
+      }
+    jsList.innerHTML = todoListHtml;
+
+  }
+</script>  

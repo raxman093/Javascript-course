@@ -5,16 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
     <style>
-      
+      ul{
+        list-style: none;
+        padding-left: 0;
+      }
     </style>
 </head>
 <body>
   <p>Список дел</p>
-  <input type="text" placeholder="Название дела">
-  <button>Добавить</button>
+  <input type="text" placeholder="Название дела" class="js-name-input">
+  <button onclick="addTodo()">Добавить</button>
+  <ul class="js-todo-list"></ul> <!--создали список сюда будем добавлять новые элементы -->
+
+
+
 
   <script>
-    const todoList = [];
+    let jsList = document.querySelector('.js-todo-list'); //нашли список сюда будем добавлять новые элементы
+    let todoListHtml = "";
+    function addTodo(){
+      const inputElement = document.querySelector(".js-name-input"); //нашли input откуда будем брать значение и добавлять на страницу
+      todoListHtml += `<li>${inputElement.value} <button onclick = "">Delette</button></li>`
+      inputElement.value = "";
+      jsList.innerHTML = todoListHtml;
+    }
   </script>
 </body>
 </html>
