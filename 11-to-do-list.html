@@ -70,7 +70,7 @@
           todoListHtml += `<li class="todo-grid">
                             <div>${todoList[i].name}</div>
                             <div>${todoList[i].date}</div>  
-                            <button onclick = "todoList.splice(${i}, 1); addTodo();" class="deletteButton">Delette</button>
+                            <button onclick = "document.querySelectorAll('.js-todo-list li')[${i}].remove(), todoList.splice(${i}, 1); addTodo();" class="deletteButton">Delette</button>
                             </li>`
           
         }
