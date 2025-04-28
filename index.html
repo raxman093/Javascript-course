@@ -1,7 +1,6 @@
 
 
 <script>
-  const todoList = []; 
   let jsList = document.querySelector('.js-todo-list'); //нашли список сюда будем добавлять новые элементы
   let todoListHtml = "";
   function addTodo(){
@@ -22,9 +21,49 @@
     todoList.push(inputElement.value); //Добавили наше значение в конец массива
       inputElement.value = ""; //очистили наш input
       for(let i = 0; i < todoList.length; i++){
-        todoListHtml += `<li>${todoList[i]}</li>`
+        todoListHtml += `<li>${todoList[i]}<button onclick = "">Delette</button></li>`
       }
     jsList.innerHTML = todoListHtml;
-
   }
 </script>  
+
+
+<script>
+  const todoList = []; // Храним список задач
+
+  function addTodo() {
+    const inputElement = document.querySelector(".js-name-input"); // Находим input
+    const jsList = document.querySelector(".js-todo-list"); // Находим список
+
+    const task = inputElement.value.trim(); // Убираем лишние пробелы
+    if (task === "") {
+      alert("Введите задачу!"); // Проверка на пустое значение
+      return;
+    }
+
+    todoList.push(task); // Добавляем задачу в массив
+    inputElement.value = ""; // Очищаем input
+
+    const listItem = document.createElement("li"); // Создаём элемент списка
+    listItem.textContent = task; // Устанавливаем текст задачи
+
+    const deleteButton = document.createElement("button"); // Добавляем кнопку удаления
+    deleteButton.textContent = "Удалить";
+    deleteButton.style.marginLeft = "10px";
+    deleteButton.onclick = () => {
+      deleteTask(listItem, task); // Удаляем задачу при нажатии
+    };
+
+    listItem.appendChild(deleteButton); // Добавляем кнопку к задаче
+    jsList.appendChild(listItem); // Добавляем задачу в список на странице
+  }
+
+  function deleteTask(listItem, task) {
+    const jsList = document.querySelector(".js-todo-list");
+    const taskIndex = todoList.indexOf(task); // Находим индекс задачи
+    if (taskIndex > -1) {
+      todoList.splice(taskIndex, 1); // Удаляем из массива
+      jsList.removeChild(listItem); // Удаляем из DOM
+    }
+  }
+</script>
