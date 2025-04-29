@@ -9,15 +9,54 @@
     </style>
 </head>
 <body>
-
+  <button onclick="" class="js-button">Click</button>
 
 
     <script>
+      const buttonElement = document.querySelector('.js-button');
+      buttonElement.addEventListener('click', ()=> {
+          console.log("click");
+      });
+
+
+
       let array = ['one', 'two', 'three', 'four', 'five', 'six', 'seven'];
       array.forEach(function(value, index){   //метод forEach является наиболее предпочтительным способом для перебора массива
+        if(value === 'two'){
+          return; //здесь return играет роль continue пропустит цикл если значение равно two
+        }
         console.log(index);
         console.log(value);
       })
+
+      array.forEach((value, index) => {   //метод forEach является наиболее предпочтительным способом для перебора массива
+        if(value === 'two'){
+          return; //здесь return играет роль continue пропустит цикл если значение равно two
+        }
+        console.log(index);
+        console.log(value);
+      });
+
+      const arrowFunction = () =>{ //упрощенная версия функций
+        console.log("hello");
+      }
+      arrowFunction();
+
+
+      const oneParam = param =>{ //упрощенная версия функций не требует скобок если в ней только 1 параметр 
+        console.log("param");
+      }
+
+      const oneLine = () => 2+3; //это функция со стрелками в одну строку, return здесь не обязателен, по умолчанию он вернет то что находится после  =>
+      
+      const object1 = {
+        method:()=>{
+          console.log('1');
+        },
+        method2(){
+          console.log('2'); //здесь мы использовали упрощенный синтаксис сокращенного метода
+        }
+      }
     </script>
 </body>
 </html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+      body{
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      ul{
+        list-style: none;
+        padding-left: 0;
+      }
+      .todo-grid{
+        display: grid;
+        grid-template-columns: 200px 150px 100px;
+        gap: 10px;
+        margin-bottom: 10px;
+        align-items: center;
+      }
+      .name-input,
+      .date-input{
+        font-size: 15px;
+        padding: 6px;
+      }
+      .add-button{
+        background-color: green;
+        color: white;
+        border: none;
+        font-size: 15px;
+        cursor: pointer;
+        align-self: stretch;
+      }
+      .deletteButton{
+        background-color: darkred;
+        color: white;
+        border: none;
+        font-size: 15px;
+        cursor: pointer;
+        padding-top: 10px; 
+        padding-bottom: 10px;
+      }
+    </style>
+</head>
+<body>
+  <p>Список дел</p>
+  <div class="todo-grid">
+    <input type="text" placeholder="Название дела" class="js-name-input name-input">
+    <input type="date" class="js-date-input date-input">
+    <button class="add-button">Добавить</button>
+  </div>
+  <ul class="js-todo-list"></ul> <!--создали список сюда будем добавлять новые элементы -->
+
+
+  <script>
+    const todoList = []; 
+    document.querySelector('.add-button')
+      .addEventListener('click', ()=>{
+        addTodo();
+      });
+    function addTodo(){ 
+ 
+      let jsList = document.querySelector('.js-todo-list'); //нашли список сюда будем добавлять новые элементы
+      let todoListHtml = ""; //создали пустую строку куда будем добавлять наши элементы с массива
+      const inputName = document.querySelector(".js-name-input"); //нашли input откуда будем брать значение и добавлять на страницу
+      const inputDate = document.querySelector(".js-date-input"); //нашли input откуда будем брать значение и добавлять на страницу
+
+      todoList.push({name: inputName.value, date: inputDate.value}); //Добавили наше значение в конец массива
+        inputName.value = ""; //очистили наш input
+        inputDate.value = ""; //очистили наш input
+      
+      todoList.forEach((todoObject, index) => { //используем упрощенную функцию
+        todoListHtml += `<li class="todo-grid">
+                            <div>${todoObject.name}</div>
+                            <div>${todoObject.date}</div>  
+                            <button onclick = "removeTodo(${index})" class="deletteButton">Delette</button>
+                          </li>`
+      });
+      jsList.innerHTML = todoListHtml;
+    }
+    function removeTodo(index) {
+      todoList.splice(index, 1); // Удаляем задачу из массива
+      addTodo(); // Перерисовываем список
+    }
+  </script>
+</body>
+</html>

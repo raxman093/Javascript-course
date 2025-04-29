@@ -66,7 +66,17 @@
         let resultGame = document.querySelector('.js-result'); 
         let choice = document.querySelector('.js-moves');
         let checkInfo = document.querySelector('.js-score'); 
-         
+        
+        document.body.addEventListener('keydown', (event)=>{
+          if(event.key ==='r'){
+            game('rock');
+          }else if(event.key ==='s'){
+            game('scissors');
+          }else if(event.key ==='p'){
+            game('paper');
+          }
+        });
+
         let game = function(button){
           const youChoice = button;
           
@@ -132,7 +142,7 @@
         let intervalId;   //создали переменную для того что бы хранить идентификатор возвращаемый функцией setInterval
         function autoPlay(){
           if(!isAutoPlaying){
-            intervalId = setInterval(function(){
+            intervalId = setInterval(()=>{ //используем упрощенную функцию
               const playerMove = pickPcMove();
               game(playerMove);
             }, 5000)
