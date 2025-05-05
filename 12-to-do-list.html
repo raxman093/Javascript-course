@@ -59,8 +59,8 @@
       .addEventListener('click', ()=>{
         addTodo();
       });
+   
     function addTodo(){ 
- 
       let jsList = document.querySelector('.js-todo-list'); //нашли список сюда будем добавлять новые элементы
       let todoListHtml = ""; //создали пустую строку куда будем добавлять наши элементы с массива
       const inputName = document.querySelector(".js-name-input"); //нашли input откуда будем брать значение и добавлять на страницу
@@ -74,15 +74,18 @@
         todoListHtml += `<li class="todo-grid">
                             <div>${todoObject.name}</div>
                             <div>${todoObject.date}</div>  
-                            <button onclick = "removeTodo(${index})" class="deletteButton">Delette</button>
+                            <button class="deletteButton">Delette</button>
                           </li>`
       });
       jsList.innerHTML = todoListHtml;
     }
-    function removeTodo(index) {
-      todoList.splice(index, 1); // Удаляем задачу из массива
-      addTodo(); // Перерисовываем список
-    }
+    document.querySelectorAll ('.deletteButton').forEach((deletteButton, index)=>{
+      deletteButton.addEventListener('click', ()=>{
+        todoList.splice(index, 1); // Удаляем задачу из массива
+        addTodo(); // Перерисовываем список
+      });
+    });
+
   </script>
 </body>
 </html>
