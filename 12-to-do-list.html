@@ -60,31 +60,46 @@
         addTodo();
       });
    
-    function addTodo(){ 
-      let jsList = document.querySelector('.js-todo-list'); //нашли список сюда будем добавлять новые элементы
-      let todoListHtml = ""; //создали пустую строку куда будем добавлять наши элементы с массива
-      const inputName = document.querySelector(".js-name-input"); //нашли input откуда будем брать значение и добавлять на страницу
-      const inputDate = document.querySelector(".js-date-input"); //нашли input откуда будем брать значение и добавлять на страницу
+      function addTodo() { 
+        let jsList = document.querySelector('.js-todo-list'); // нашли список
+        let todoListHtml = ""; // строка для списка
+        const inputName = document.querySelector(".js-name-input"); // нашли input для названия
+        const inputDate = document.querySelector(".js-date-input"); // нашли input для даты
 
-      todoList.push({name: inputName.value, date: inputDate.value}); //Добавили наше значение в конец массива
-        inputName.value = ""; //очистили наш input
-        inputDate.value = ""; //очистили наш input
-      
-      todoList.forEach((todoObject, index) => { //используем упрощенную функцию
-        todoListHtml += `<li class="todo-grid">
-                            <div>${todoObject.name}</div>
-                            <div>${todoObject.date}</div>  
-                            <button class="deletteButton">Delette</button>
-                          </li>`
-      });
-      jsList.innerHTML = todoListHtml;
-    }
-    document.querySelectorAll ('.deletteButton').forEach((deletteButton, index)=>{
-      deletteButton.addEventListener('click', ()=>{
-        todoList.splice(index, 1); // Удаляем задачу из массива
-        addTodo(); // Перерисовываем список
-      });
-    });
+        // Добавляем задачу в массив, если поля заполнены
+        if (inputName.value && inputDate.value) {
+          todoList.push({ name: inputName.value, date: inputDate.value });
+          inputName.value = ""; // очищаем поля
+          inputDate.value = ""; 
+        }
+
+        // Генерация списка задач
+        todoList.forEach((todoObject, index) => { 
+          todoListHtml += `
+            <li class="todo-grid">
+              <div>${todoObject.name}</div>
+              <div>${todoObject.date}</div>  
+              <button class="deletteButton" data-index="${index}">Удалить</button>
+            </li>`;
+        });
+
+        jsList.innerHTML = todoListHtml;
+
+        // Привязываем обработчики для кнопок удаления
+        document.querySelectorAll('.deletteButton').forEach((deleteButton) => {
+          deleteButton.addEventListener('click', (event) => {
+            const index = event.target.dataset.index; // Получаем индекс задачи
+            todoList.splice(index, 1); // Удаляем задачу из массива
+            addTodo(); // Обновляем список
+          });
+        });
+}
+
+// Добавляем обработчик на кнопку "Добавить"
+document.querySelector('.add-button').addEventListener('click', () => {
+  addTodo();
+});
+    
 
   </script>
 </body>
